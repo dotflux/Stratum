@@ -17,7 +17,7 @@ export class User {
   @Prop({
     type: [
       {
-        id: { type: Types.ObjectId, ref: 'Tenant', required: true },
+        id: { type: Types.ObjectId, ref: 'Workspace', required: true },
         role: { type: String, required: true, enum: ['admin', 'member'] },
         joinedAt: { type: Date, default: Date.now },
       },
@@ -25,6 +25,8 @@ export class User {
     default: [],
   })
   tenants: { id: Types.ObjectId; role: string; joinedAt: Date }[];
+  @Prop({ type: [{ type: Types.ObjectId, ref: 'Task' }], default: [] })
+  tasks: Types.ObjectId[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

@@ -9,6 +9,7 @@ export default {
         fadeIn: "fadeIn 1.5s ease-in",
         glow: "glow 1.5s infinite ease-in-out",
         textHover: "textHover 0.5s ease-in-out forwards",
+        drop: "drop 0.8s ease-out forwards",
       },
       keyframes: {
         "text-gradient": {
@@ -41,6 +42,10 @@ export default {
             transform: "scale(1)",
             color: "#ffffff", // Back to default color
           },
+        },
+        drop: {
+          "0%": { opacity: 0, transform: "translateY(-50px)" },
+          "100%": { opacity: 1, transform: "translateY(0)" },
         },
       },
       fontFamily: {

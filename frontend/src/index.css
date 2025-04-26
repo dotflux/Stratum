@@ -4,11 +4,28 @@
 @tailwind utilities;
 
 html,
-body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  /* Prevent horizontal scrolling */
+body /* Global scrollbar styles */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2a2a2a #121212; /* thumb, track */
+}
+
+/* WebKit (Chrome, Brave, Edge, Safari) */
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #121212; /* match site background */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #2a2a2a; /* darker thumb */
+  border-radius: 6px;
+  border: 2px solid #121212; /* blend into background */
+  background-clip: content-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #3a3a3a; /* slight contrast on hover */
 }

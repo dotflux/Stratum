@@ -22,7 +22,7 @@ const SignUp = () => {
         navigate(`/signup/otp?email=${response.data.dummyMail}`);
       }
     } catch (error) {
-      console.error("No ongoing registration detected");
+      console.log("No ongoing registration detected");
     }
   };
 

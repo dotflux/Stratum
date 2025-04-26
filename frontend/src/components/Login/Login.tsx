@@ -22,7 +22,7 @@ const Login = () => {
         navigate(`/home`);
       }
     } catch (error) {
-      console.error("No session detected");
+      console.log("No session detected");
     }
   };
 

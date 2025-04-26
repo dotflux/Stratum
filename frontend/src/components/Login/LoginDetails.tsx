@@ -136,25 +136,27 @@ const LoginDetails = () => {
               </div>
             )}
           </div>
-          <div>{isSubmitting && <Loader />}</div>
-          <div className="flex justify-start z-10 relative space-x-2 mb-4">
-            <h3 className="text-white">Don't have an account?</h3>{" "}
-            <Link to="/signup" className="text-blue-300">
-              Register
-            </Link>
-          </div>
           <div className="flex justify-start z-10 relative space-x-2 mb-4">
             <h3 className="text-white">Forgot your password?</h3>{" "}
             <Link to="/forgetpassword" className="text-blue-300">
               Reset
             </Link>
           </div>
+          <div className="flex justify-start z-10 relative space-x-2 mb-4">
+            <h3 className="text-white">Don't have an account?</h3>{" "}
+            <Link to="/signup" className="text-blue-300">
+              Register
+            </Link>
+          </div>
+
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white py-3 rounded-md transition shadow-lg"
+            className={`w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white py-3 rounded-md transition shadow-lg ${
+              isSubmitting && "opacity-55"
+            }`}
           >
-            Login
+            {isSubmitting ? <Loader /> : "Login"}
           </button>
         </form>
       </div>

@@ -180,7 +180,6 @@ const SignUpDetails = () => {
               </div>
             )}
           </div>
-          <div>{isSubmitting && <Loader />}</div>
           <div className="flex justify-start z-10 relative space-x-2 mb-4">
             <h3 className="text-white">Already have an account?</h3>{" "}
             <Link to="/login" className="text-blue-300">
@@ -190,9 +189,11 @@ const SignUpDetails = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white py-3 rounded-md transition shadow-lg"
+            className={`w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white py-3 rounded-md transition shadow-lg ${
+              isSubmitting && "opacity-55"
+            }`}
           >
-            Sign Up
+            {isSubmitting ? <Loader /> : "Signup"}
           </button>
         </form>
       </div>
