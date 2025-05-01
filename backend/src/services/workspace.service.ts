@@ -86,4 +86,12 @@ export class WorkspaceService {
       { new: true },
     );
   }
+
+  async findAllWorkspaces(id: Types.ObjectId) {
+    return await this.WorkspaceModel.find({ members: id });
+  }
+
+  async findOwnerWorkspaces(id: Types.ObjectId) {
+    return await this.WorkspaceModel.find({ owner: id });
+  }
 }

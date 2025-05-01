@@ -1,21 +1,18 @@
-import { Request } from 'express';
+import { Request, Response } from 'express';
 import { BadRequestException, UnauthorizedException } from '@nestjs/common';
 import { UserService } from 'src/services/user.service';
+import { WorkspaceService } from 'src/services/workspace.service';
 import * as jwt from 'jsonwebtoken';
 import * as dotenv from 'dotenv';
 import { Types } from 'mongoose';
 
-export interface UserData {
-  username: string;
-  tenants: { id: Types.ObjectId; role: string; joinedAt: Date }[];
-  email: string;
-  strats: number;
-  tier: string;
-}
-
 dotenv.config();
 
-export const authHome = async (req: Request, userService: UserService) => {
+export const logout = async (
+  req: Request,
+  userService: UserService,
+  res: Response,
+) => {
   try {
     const token = req.cookies?.user_token; // Extract token from cookies
 
@@ -37,15 +34,9 @@ export const authHome = async (req: Request, userService: UserService) => {
       throw new UnauthorizedException('Invalid token');
     }
 
-    const userData: UserData = {
-      username: user.username,
-      tenants: user.tenants,
-      email: user.email,
-      strats: user.strats,
-      tier: user.tier,
-    };
+    res.clearCookie('user_token');
 
-    return { valid: true, user: userData };
+    return { valid: true, message: 'Logged out' };
   } catch (error) {
     if (
       error instanceof BadRequestException ||
@@ -53,7 +44,7 @@ export const authHome = async (req: Request, userService: UserService) => {
     ) {
       throw error; // Re-throw validation errors, so they are handled properly
     }
-    console.log('Error in home auth validation: ', error);
+    console.log('Error in logout: ', error);
     throw new BadRequestException({
       valid: false,
       error: 'Internal Server Error',

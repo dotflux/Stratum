@@ -14,6 +14,7 @@ import { HomeModule } from './modules/home.module';
 import { EditWorkspaceModule } from './modules/editWorkspace.module';
 import { TaskModule } from './modules/task.module';
 import { FileModule } from './modules/file.module';
+import { DummyEmailChangeModule } from './modules/dummyEmailChange.module';
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ dotenv.config();
     TaskModule,
     EditWorkspaceModule,
     FileModule,
+    DummyEmailChangeModule,
   ],
   controllers: [AppController],
   providers: [AppService],

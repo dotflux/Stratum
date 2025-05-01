@@ -4,20 +4,16 @@ import { UserService } from 'src/services/user.service';
 import * as jwt from 'jsonwebtoken';
 import * as dotenv from 'dotenv';
 import { Types } from 'mongoose';
-
-export interface UserData {
-  username: string;
-  tenants: { id: Types.ObjectId; role: string; joinedAt: Date }[];
-  email: string;
-  strats: number;
-  tier: string;
-}
+import { DummyEmailChangeService } from 'src/services/dummyEmailChange.service';
 
 dotenv.config();
-
-export const authHome = async (req: Request, userService: UserService) => {
+export const checkState = async (
+  req: Request,
+  userService: UserService,
+  dummyEmailService: DummyEmailChangeService,
+) => {
   try {
-    const token = req.cookies?.user_token; // Extract token from cookies
+    const token = req.cookies?.email_token; // Extract token from cookies
 
     if (!token) {
       throw new UnauthorizedException('No token provided');
@@ -25,27 +21,21 @@ export const authHome = async (req: Request, userService: UserService) => {
 
     // Verify JWT
     const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as {
-      id: string;
+      dummyMail: string;
     };
 
-    if (!decoded?.id) {
+    if (!decoded?.dummyMail) {
       throw new UnauthorizedException('Invalid token');
     }
 
-    const user = await userService.findById(decoded?.id);
-    if (!user) {
-      throw new UnauthorizedException('Invalid token');
+    const dummyUser = await dummyEmailService.findUserByEmail(
+      decoded?.dummyMail,
+    );
+    if (!dummyUser) {
+      throw new UnauthorizedException('No such user in process');
     }
 
-    const userData: UserData = {
-      username: user.username,
-      tenants: user.tenants,
-      email: user.email,
-      strats: user.strats,
-      tier: user.tier,
-    };
-
-    return { valid: true, user: userData };
+    return { valid: true, email: decoded.dummyMail };
   } catch (error) {
     if (
       error instanceof BadRequestException ||
@@ -53,7 +43,7 @@ export const authHome = async (req: Request, userService: UserService) => {
     ) {
       throw error; // Re-throw validation errors, so they are handled properly
     }
-    console.log('Error in home auth validation: ', error);
+    console.log('Error in checking email change state: ', error);
     throw new BadRequestException({
       valid: false,
       error: 'Internal Server Error',

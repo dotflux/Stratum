@@ -50,8 +50,6 @@ export const listTasks = async (
     if (!isMember) {
       throw new UnauthorizedException('Not a member');
     }
-    const isAdmin = workspace.admins.includes(user._id);
-    const isOwner = workspace.owner.equals(user._id);
 
     let taskInfo: {
       taskId: string;
@@ -69,13 +67,20 @@ export const listTasks = async (
         if (!taskDoc) {
           throw new BadRequestException('Invalid task id');
         }
+        const exists = await userService.findById(
+          taskDoc.assignedTo.toString(),
+        );
+        if (!exists) {
+          throw new BadRequestException('Invalid user');
+        }
+
         taskInfo.push({
           taskId: taskDoc._id.toString(),
           name: taskDoc.name,
           description: taskDoc.description,
           deadline: taskDoc.deadline,
           steps: taskDoc.steps,
-          assignedTo: taskDoc.assignedUsername,
+          assignedTo: exists.username,
           createdAt: taskDoc.createdAt,
         });
       }

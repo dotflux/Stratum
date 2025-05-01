@@ -34,6 +34,21 @@ export const createWorkspace = async (
       throw new UnauthorizedException('Invalid token');
     }
 
+    const allWorkspaces = await workspaceService.findOwnerWorkspaces(user._id);
+    if (user.tier === 'free' && allWorkspaces.length === 1) {
+      throw new BadRequestException({
+        valid: false,
+        error: 'Free plan can only create 1 workspace',
+      });
+    }
+
+    if (user.tier === 'pro' && allWorkspaces.length >= 10) {
+      throw new BadRequestException({
+        valid: false,
+        error: 'Pro plan can only create 10 workspace',
+      });
+    }
+
     if (!req.body.workspaceName || req.body.workspaceName.length <= 0) {
       throw new BadRequestException({
         valid: false,
@@ -64,6 +79,20 @@ export const createWorkspace = async (
       throw new BadRequestException({
         valid: false,
         error: "Can't pick more than 10 initial members",
+      });
+    }
+
+    if (user.tier === 'free' && usernames.length >= 5) {
+      throw new BadRequestException({
+        valid: false,
+        error: 'Free plan can only have 5 members in workspace',
+      });
+    }
+
+    if (user.tier === 'pro' && usernames.length >= 15) {
+      throw new BadRequestException({
+        valid: false,
+        error: 'Pro plan can only have 15 members in workspace',
       });
     }
 
@@ -138,7 +167,11 @@ export const createWorkspace = async (
       role: 'admin',
       joinedAt: new Date(),
     });
-    await user.save();
+    if (!user.rewardLog.createdWorkspace) {
+      user.strats += 500;
+      user.rewardLog.createdWorkspace = true;
+      user.save();
+    }
 
     return { valid: true, message: 'Workspace created' };
   } catch (error) {

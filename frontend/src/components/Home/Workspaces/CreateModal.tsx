@@ -184,7 +184,6 @@ const CreateModal = ({ isCreateOpen, onClose }: ModalProps) => {
             >
               <option value="Admin">Admin</option>
               <option value="Member">Member</option>
-              <option value="Viewer">Viewer</option>
             </select>
           </div>
 

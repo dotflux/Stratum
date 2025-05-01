@@ -1,13 +1,16 @@
 import { useState, useEffect, createContext, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import HomeBg from "./HomeBg";
 import Sidebar from "./SideBar";
 import { Outlet } from "react-router-dom";
+import HomeBg from "./HomeBg";
 
 interface User {
   username: string;
   tenants: { id: string; role: string; joinedAt: Date }[];
+  email: string;
+  strats: number;
+  tier: string;
 }
 
 // Create a context for the user

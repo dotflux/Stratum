@@ -1,4 +1,5 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 import openSidebar from "../../assets/openSidebar.svg";
 import closeSidebar from "../../assets/closeSidebar.svg";
 import dashboardIcon from "../../assets/book.svg";
@@ -14,6 +15,7 @@ interface SidebarProps {
 
 const Sidebar = ({ isExpanded, setIsExpanded }: SidebarProps) => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const menuItems = [
     { name: "Dashboard", link: "/home/dashboard", icon: dashboardIcon },
@@ -21,6 +23,23 @@ const Sidebar = ({ isExpanded, setIsExpanded }: SidebarProps) => {
     { name: "Account", link: "/home/account", icon: accountIcon },
     { name: "Billing", link: "/home/billing", icon: billingIcon },
   ];
+
+  const logOut = async () => {
+    try {
+      const res = await axios.post(
+        "http://localhost:3000/home/logout",
+        {},
+        { withCredentials: true }
+      );
+      if (res.data.valid) {
+        navigate("/login");
+      }
+    } catch (err) {
+      if (axios.isAxiosError(err) && err.response) {
+        console.log(err.response.data.message);
+      }
+    }
+  };
 
   return (
     <>
@@ -69,7 +88,10 @@ const Sidebar = ({ isExpanded, setIsExpanded }: SidebarProps) => {
 
         {/* Logout Button */}
         <div className="mt-auto pt-4 border-t border-[#1f1f1f]">
-          <button className="flex items-center gap-3 px-4 py-2 text-sm text-white hover:bg-red-700 hover:text-white rounded-md transition w-full">
+          <button
+            className="flex items-center gap-3 px-4 py-2 text-sm text-white hover:bg-red-700 hover:text-white rounded-md transition w-full"
+            onClick={logOut}
+          >
             <img src={logoutIcon} className="w-5 h-5" />
             <span>Logout</span>
           </button>

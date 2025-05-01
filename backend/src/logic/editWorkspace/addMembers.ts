@@ -55,6 +55,20 @@ export const addMembers = async (
       throw new BadRequestException('Empty list provided');
     }
 
+    const totalLength = workspace.members.length + usernames.length;
+
+    if (user.tier === 'free' && totalLength >= 5) {
+      throw new BadRequestException(
+        'Free plan can only have 5 members in workspace',
+      );
+    }
+
+    if (user.tier === 'pro' && totalLength >= 15) {
+      throw new BadRequestException(
+        'Pro plan can only have 15 members in workspace',
+      );
+    }
+
     for (const member of usernames) {
       const exists = await userService.findUsername(member);
       if (!exists) {
@@ -77,6 +91,11 @@ export const addMembers = async (
         id,
         `${user.username} added ${exists.username}`,
       );
+      if (!user.rewardLog.addedMembers.includes(exists._id)) {
+        user.strats += 350;
+        user.rewardLog.addedMembers.push(exists._id);
+        user.save();
+      }
     }
     await workspace.save();
 

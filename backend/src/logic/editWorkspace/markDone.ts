@@ -87,6 +87,18 @@ export const markDone = async (
       );
     }
 
+    const assignedUser = await userService.findById(assignedTo.toString());
+    if (!assignedUser) {
+      throw new BadRequestException('Cant reward - invalid user');
+    }
+    if (isExpired) {
+      assignedUser.strats += 10;
+      assignedUser.save();
+    } else if (!isExpired) {
+      assignedUser.strats += 80;
+      assignedUser.save();
+    }
+
     return {
       valid: true,
       message: 'Tasks removed successfully',

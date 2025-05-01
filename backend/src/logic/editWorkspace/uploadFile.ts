@@ -57,6 +57,21 @@ export const uploadFile = async (
 
     if (!file) throw new BadRequestException('No file uploaded');
 
+    const MAX_FILE_SIZE = {
+      free: 10 * 1024 * 1024, // 10MB
+      pro: 25 * 1024 * 1024, // 25MB
+    };
+
+    const limit =
+      MAX_FILE_SIZE[user.tier as keyof typeof MAX_FILE_SIZE] ??
+      MAX_FILE_SIZE.free;
+
+    if (file.size > limit) {
+      throw new BadRequestException(
+        `Your plan allows file uploads up to ${limit / (1024 * 1024)}MB`,
+      );
+    }
+
     const fileMetadata = {
       originalName: file.originalname,
       fileName: file.filename,

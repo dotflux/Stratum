@@ -62,6 +62,20 @@ export const createTask = async (
       });
     }
 
+    if (user.tier === 'free' && workspace.tasks.length >= 30) {
+      throw new BadRequestException({
+        valid: false,
+        error: 'Free plan only allows 30 total tasks',
+      });
+    }
+
+    if (user.tier === 'pro' && workspace.tasks.length >= 100) {
+      throw new BadRequestException({
+        valid: false,
+        error: 'Pro plan only allows 100 total tasks',
+      });
+    }
+
     if (name.length <= 0) {
       throw new BadRequestException({
         valid: false,
@@ -179,6 +193,9 @@ export const createTask = async (
         `${user.username} assigned ${assingedUserDocument.username} the task: ${name}`,
       );
     }
+
+    user.strats += 5;
+    user.save();
 
     return { valid: true, message: 'Task created successfully' };
   } catch (error) {

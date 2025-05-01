@@ -25,8 +25,29 @@ export class User {
     default: [],
   })
   tenants: { id: Types.ObjectId; role: string; joinedAt: Date }[];
+
+  @Prop({ type: Number, default: 0 })
+  strats: number;
+
+  @Prop({ type: String, default: 'free' })
+  tier: string;
+
   @Prop({ type: [{ type: Types.ObjectId, ref: 'Task' }], default: [] })
   tasks: Types.ObjectId[];
+
+  @Prop({
+    type: {
+      createdWorkspace: { type: Boolean, default: false },
+      addedMembers: { type: [Types.ObjectId], default: [] },
+    },
+    default: () => ({}),
+  })
+  rewardLog: {
+    createdWorkspace: boolean;
+    assignedTasks: Types.ObjectId[];
+    completedTasks: Types.ObjectId[];
+    addedMembers: Types.ObjectId[];
+  };
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
