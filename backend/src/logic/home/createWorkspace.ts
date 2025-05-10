@@ -172,6 +172,7 @@ export const createWorkspace = async (
       user.rewardLog.createdWorkspace = true;
       user.save();
     }
+    user.save();
 
     return { valid: true, message: 'Workspace created' };
   } catch (error) {
