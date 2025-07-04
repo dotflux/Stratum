@@ -16,9 +16,14 @@ import WorkspaceSettings from "./components/Home/WorkspaceEdit/WorkspaceSettings
 import Account from "./components/Home/Account/Account";
 import Billing from "./components/Home/Billing/Billing";
 import ForgetPassOtp from "./components/ForgetPassword/ForgetPassOtp";
+import Index from "./components/Index";
 
 function App() {
   const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Index />,
+    },
     {
       path: "/signup",
       element: <SignUp />,
