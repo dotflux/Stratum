@@ -149,9 +149,17 @@ frontend/
 
 ---
 
+## Home Page
+
+This is where dashboard,account settings,workspaces,billing and logout are
+
+![home_page](https://github.com/dotflux/Stratum/blob/cf36dc39ddca6a0682be10ce764da659faaa5097/home_page.png)
+
 ## Workspaces
 
 Users can create and manage workspaces
+
+![create_workspace](https://github.com/dotflux/Stratum/blob/cf36dc39ddca6a0682be10ce764da659faaa5097/create_workspace.png)
 
 ![workspaces_page](https://github.com/dotflux/Stratum/blob/e5bd8d53f9395c05f5e9e7e86645cc1b65f2b432/workspaces.png)
 
