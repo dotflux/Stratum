@@ -5,10 +5,6 @@ Stratum is a full-stack collaborative workspace and task management platform, fe
 ---
 
 ## Table of Contents
-<<<<<<< HEAD
-
-=======
->>>>>>> 1e56261292e7f77fa0586f83be6ccc9c508fe2b8
 - [Project Overview](#project-overview)
 - [Architecture](#architecture)
 - [Backend](#backend)
@@ -26,19 +22,11 @@ Stratum is a full-stack collaborative workspace and task management platform, fe
 ---
 
 ## Project Overview
-<<<<<<< HEAD
-
-=======
->>>>>>> 1e56261292e7f77fa0586f83be6ccc9c508fe2b8
 Stratum enables teams to collaborate in workspaces, manage members, upload and share files, create and track tasks, and handle user accounts securely. The backend is built with [NestJS](https://nestjs.com/) and MongoDB, while the frontend uses [React](https://react.dev/) with [Vite](https://vitejs.dev/) for fast development and modern UI.
 
 ---
 
 ## Architecture
-<<<<<<< HEAD
-
-=======
->>>>>>> 1e56261292e7f77fa0586f83be6ccc9c508fe2b8
 - **Backend:** RESTful API using NestJS, modularized for scalability and maintainability.
 - **Frontend:** SPA using React, TypeScript, and Vite, with modular components for each feature.
 - **Database:** MongoDB (see backend models).
@@ -48,10 +36,6 @@ Stratum enables teams to collaborate in workspaces, manage members, upload and s
 ## Backend
 
 ### Backend Features
-<<<<<<< HEAD
-
-=======
->>>>>>> 1e56261292e7f77fa0586f83be6ccc9c508fe2b8
 - User authentication (login, signup, password reset)
 - Workspace creation, editing, and member management
 - File upload/download and management
@@ -59,10 +43,6 @@ Stratum enables teams to collaborate in workspaces, manage members, upload and s
 - User profile and account management
 
 ### Backend Directory Structure
-<<<<<<< HEAD
-
-=======
->>>>>>> 1e56261292e7f77fa0586f83be6ccc9c508fe2b8
 ```
 backend/
   src/
@@ -83,10 +63,6 @@ backend/
 ```
 
 ### Backend Setup & Development
-<<<<<<< HEAD
-
-=======
->>>>>>> 1e56261292e7f77fa0586f83be6ccc9c508fe2b8
 1. **Install dependencies:**
    ```bash
    cd backend
@@ -105,10 +81,6 @@ backend/
    - See `src/controllers/` for available endpoints (login, signup, workspace, etc.).
 
 ### Backend Testing
-<<<<<<< HEAD
-
-=======
->>>>>>> 1e56261292e7f77fa0586f83be6ccc9c508fe2b8
 ```bash
 npm run test       # Unit tests
 npm run test:e2e   # End-to-end tests
@@ -120,10 +92,6 @@ npm run test:cov   # Test coverage
 ## Frontend
 
 ### Frontend Features
-<<<<<<< HEAD
-
-=======
->>>>>>> 1e56261292e7f77fa0586f83be6ccc9c508fe2b8
 - User authentication (login, signup, password reset)
 - Dashboard with workspace/task overview
 - Workspace management (create, edit, leave, delete)
@@ -133,10 +101,6 @@ npm run test:cov   # Test coverage
 - Account and billing management
 
 ### Frontend Directory Structure
-<<<<<<< HEAD
-
-=======
->>>>>>> 1e56261292e7f77fa0586f83be6ccc9c508fe2b8
 ```
 frontend/
   src/
@@ -158,10 +122,6 @@ frontend/
 ```
 
 ### Frontend Setup & Development
-<<<<<<< HEAD
-
-=======
->>>>>>> 1e56261292e7f77fa0586f83be6ccc9c508fe2b8
 1. **Install dependencies:**
    ```bash
    cd frontend
@@ -183,18 +143,10 @@ frontend/
 ---
 
 ## Extending the Project
-<<<<<<< HEAD
-
-=======
->>>>>>> 1e56261292e7f77fa0586f83be6ccc9c508fe2b8
 - **Backend:** Add new features by creating logic, controller, service, and module files in `backend/src/`. Follow the modular structure for scalability.
 - **Frontend:** Add new UI features by creating new components in `frontend/src/components/` and updating routes/UI as needed.
 
 ---
 
 ## License
-<<<<<<< HEAD
-
-=======
->>>>>>> 1e56261292e7f77fa0586f83be6ccc9c508fe2b8
 This project is MIT licensed. See individual backend/frontend directories for more details.
