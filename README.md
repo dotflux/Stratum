@@ -2,6 +2,7 @@
 
 Stratum is a full-stack collaborative workspace and task management platform, featuring a robust NestJS backend and a modern React + TypeScript + Vite frontend. It supports user authentication, workspace and member management, file uploads, task tracking, and more.
 
+![landing_page](https://github.com/dotflux/Stratum/blob/e5bd8d53f9395c05f5e9e7e86645cc1b65f2b432/landing_page.png)
 ---
 
 ## Table of Contents
@@ -87,6 +88,12 @@ npm run test:e2e   # End-to-end tests
 npm run test:cov   # Test coverage
 ```
 
+## SignUp
+
+User can create an account to venture into Stratum.
+
+![signup_page](https://github.com/dotflux/Stratum/blob/e5bd8d53f9395c05f5e9e7e86645cc1b65f2b432/signup.png)
+
 ---
 
 ## Frontend
@@ -141,6 +148,26 @@ frontend/
    ```
 
 ---
+
+## Workspaces
+
+Users can create and manage workspaces
+
+![workspaces_page](https://github.com/dotflux/Stratum/blob/e5bd8d53f9395c05f5e9e7e86645cc1b65f2b432/workspaces.png)
+
+## Task Management
+
+Users can create,delete,assign tasks, see logs change settings upload or delete files and manage members (Superadmin can not be managed)
+
+![tasks_page](https://github.com/dotflux/Stratum/blob/e5bd8d53f9395c05f5e9e7e86645cc1b65f2b432/tasks.png
+)
+
+
+## Billing
+
+Limits are set to the free plan but "Strats" the currency of Stratum can be earned by doing certain quests within the app
+
+![billing_page](https://github.com/dotflux/Stratum/blob/e5bd8d53f9395c05f5e9e7e86645cc1b65f2b432/billing.png)
 
 ## Extending the Project
 - **Backend:** Add new features by creating logic, controller, service, and module files in `backend/src/`. Follow the modular structure for scalability.
